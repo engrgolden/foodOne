@@ -1,0 +1,56 @@
+.image {
+  object-fit: cover;
+}
+
+.icon {
+  object-fit: contain;
+}
+
+.relative-navigation {
+  & .button-image-wrapper {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  display: flex;
+
+  justify-content: space-between;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 100%;
+  padding: 0;
+  list-style: none;
+}
+
+.absolute-navigation {
+  & li {
+    margin: 0 0.25rem;
+  }
+
+  & .button-image-wrapper {
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 0.75rem 0;
+  list-style: none;
+}
+
+.absolute-navigation,
+.relative-navigation {
+  & button {
+    background-color: transparent;
+    border: none;
+  }
+}

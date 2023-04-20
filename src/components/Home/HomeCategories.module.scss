@@ -1,0 +1,36 @@
+.homepage-categories {
+  padding: 0 0.5rem;
+  align-self: start;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.homepage-categories-title {
+  font-size: 1.2rem;
+}
+
+.homepage-categories-list {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+  background-color: #e8e1e1e5;
+}
+
+.homepage-categories-list-wrapper {
+  margin: auto;
+}
+
+.homepage-categories-list-item {
+  white-space: nowrap;
+  background-color: #c09f9fbf;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.homepage-categories-list-link {
+  text-decoration: none;
+  color: inherit;
+}
