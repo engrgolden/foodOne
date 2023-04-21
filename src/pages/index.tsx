@@ -1,7 +1,18 @@
 //next
 import Head from "next/head";
+import Link from "next/link";
+//react
+import { useRef, useEffect } from "react";
 
 export default function Home() {
+  const landingLinkRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    if (landingLinkRef.current !== null) {
+      landingLinkRef.current.click();
+    }
+  }, [landingLinkRef.current]);
+
   return (
     <>
       <Head>
@@ -10,7 +21,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>Hit</main>
+      <Link ref={landingLinkRef} href="homepage">
+        Hit
+      </Link>
     </>
   );
 }
