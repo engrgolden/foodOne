@@ -72,7 +72,7 @@ const ImageCarousel = (props: any) => {
           </li>
         </ul>
         <ul className={classes["absolute-navigation"]}>
-          {carouselImages.map((e, i) => (
+          {carouselImages.map((e: any, i: any) => (
             <li key={i}>
               <button className={classes["button-image-wrapper"]}>
                 <Image

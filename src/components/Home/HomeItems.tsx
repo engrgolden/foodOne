@@ -2,7 +2,7 @@
 import classes from "./HomeItems.module.scss";
 
 //redux
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../hooks/SelectorDispatchTyped";
 
 //next
 import Image from "next/image";
@@ -12,7 +12,7 @@ import Link from "next/link";
 import Stars from "../common/Star/Stars";
 
 const HomeItems = () => {
-  const fooditemsArrayState = useSelector(
+  const fooditemsArrayState = useAppSelector(
     (state: any) => state.foodItems.items
   );
   return (

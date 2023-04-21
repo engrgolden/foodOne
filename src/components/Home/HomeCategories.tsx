@@ -5,22 +5,21 @@ import Link from "next/link";
 import classes from "./HomeCategories.module.scss";
 
 //redux
-import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks/SelectorDispatchTyped";
 import { filteredPageActions } from "../store/filteredPageSlice";
 
 const HomeCategories = () => {
-  const dispatch = useDispatch();
-  const categoriesArrayState = useSelector(
+  const dispatch = useAppDispatch();
+  const categoriesArrayState = useAppSelector(
     (state) => state.foodItems.categories
   );
 
-  const filteredItemsState = useSelector(
+  const filteredItemsState: any = useAppSelector(
     (state) => state.foodItems.filteredItems
   );
 
-  const categoryLinkClickHandler = (event) => {
+  const categoryLinkClickHandler = (event: any) => {
     const propTitle = event.target.innerText;
-    console.log(filteredItemsState[propTitle]);
     dispatch(
       filteredPageActions.change({
         header: propTitle,

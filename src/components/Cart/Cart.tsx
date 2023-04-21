@@ -1,10 +1,10 @@
 //redux
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks/SelectorDispatchTyped";
 import { cartItemsActions } from "../store/cartItemsSlice";
 
 const Cart = () => {
-  const dispatch = useDispatch();
-  const CartState = useSelector((state: any) => state.cartItems);
+  const dispatch = useAppDispatch();
+  const CartState = useAppSelector((state: any) => state.cartItems);
 
   const randomHandler = () => {
     console.log(CartState.string);

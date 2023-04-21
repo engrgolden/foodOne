@@ -35,8 +35,8 @@ export const getFoodItems = () => {
         new Set(data.products.map((product: any) => product.category))
       );
 
-      const filteredItems = {};
-      categories.map((category) => {
+      const filteredItems: any = {};
+      categories.map((category: any) => {
         filteredItems[category] = [];
       });
       data.products.map((product: any) =>

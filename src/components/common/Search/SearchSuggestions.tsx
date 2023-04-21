@@ -4,7 +4,7 @@ import classes from "./SearchSuggestions.module.scss";
 const SearchSuggestions = (props: any) => {
   return (
     <ul className={classes["search-suggestion__wrapper"]}>
-      {props.suggestions.map((suggestion) => (
+      {props.suggestions.map((suggestion: any) => (
         <li key={suggestion.id} className={classes["search-suggestion"]}>
           {suggestion.title}
         </li>

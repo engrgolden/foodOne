@@ -7,23 +7,28 @@ import { getFoodItems } from "@component/components/store/foodItemsSlice";
 import { useEffect } from "react";
 
 //redux
-import { useDispatch, useSelector } from "react-redux";
+import {
+  useAppSelector,
+  useAppDispatch,
+} from "@component/components/hooks/SelectorDispatchTyped";
 
 const FilteredPage = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getFoodItems());
   }, [dispatch]);
 
-  const display = useSelector((state) => state.filteredPage.header);
+  const display = useAppSelector((state) => state.filteredPage.header);
   return (
-    display && (
-      <>
-        <Header />
-        <Content />
-      </>
-    )
+    <>
+      {display && (
+        <>
+          <Header />
+          <Content />
+        </>
+      )}
+    </>
   );
 };
 

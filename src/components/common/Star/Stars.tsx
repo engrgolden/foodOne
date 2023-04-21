@@ -7,7 +7,7 @@ import StarsIcon from "../../../../public/images/star.svg";
 //style
 import classes from "./Stars.module.scss";
 
-const Stars = (props) => {
+const Stars = (props: any) => {
   const percentage = (props.star * 100) / 5;
   const gradientString = `linear-gradient(90deg, gold ${percentage}%, white ${percentage}%)`;
   return (

@@ -6,14 +6,14 @@ import Stars from "../../Star/Stars";
 import classes from "./Content.module.scss";
 
 //redux
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@component/components/hooks/SelectorDispatchTyped";
 
 const Content = () => {
-  const filteredItems = useSelector((state) => state.filteredPage.items);
+  const filteredItems = useAppSelector((state) => state.filteredPage.items);
 
   return (
     <>
-      {filteredItems.map((item) => (
+      {filteredItems.map((item: any) => (
         <section key={item.id} className={classes["product-section"]}>
           <div className={classes["image-wrapper"]}>
             <ImageCarousel carouselItem={item} />

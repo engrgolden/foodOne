@@ -11,7 +11,7 @@ import SearchIcon from "../../../../public/images/search.svg";
 import classes from "./Search.module.scss";
 
 //redux
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@component/components/hooks/SelectorDispatchTyped";
 
 //components
 import SearchSuggestions from "./SearchSuggestions";
@@ -20,20 +20,20 @@ const Search: () => JSX.Element = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [bestRatedProp, setBestRatedProp] = useState([]);
 
-  const fooditemsArrayState = useSelector(
+  const fooditemsArrayState = useAppSelector(
     (state: any) => state.foodItems.items
   );
-
-  const searchInput = useRef();
 
   const inputChangeHandler = (event: any) => {
     if (fooditemsArrayState.length !== 0 && event.target.value !== "") {
       const searchString = event.target.value.toLowerCase().trim();
       const uniqueState = JSON.parse(JSON.stringify(fooditemsArrayState));
-      const filteredState = uniqueState.filter((foodItem) =>
+      const filteredState = uniqueState.filter((foodItem: any) =>
         foodItem.title.toLowerCase().includes(searchString)
       );
-      const bestRated = filteredState.sort((a, b) => b.rating - a.rating);
+      const bestRated = filteredState.sort(
+        (a: any, b: any) => b.rating - a.rating
+      );
 
       if (bestRated.length > 0) {
         setBestRatedProp(JSON.parse(JSON.stringify(bestRated.slice(0, 3))));
@@ -56,7 +56,6 @@ const Search: () => JSX.Element = () => {
           name="search"
           id="search"
           placeholder="search"
-          ref={searchInput}
           onChange={inputChangeHandler}
         />
         <button className={classes["search-submit"]} type="submit">
