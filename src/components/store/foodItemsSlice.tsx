@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialFoodItemsState = {
+  isLoaded: false,
   categories: [],
-  filteredItems: {},
   items: [],
 };
 
@@ -12,8 +12,8 @@ const foodItemsSlice = createSlice({
   reducers: {
     load(state, action) {
       state.categories = action.payload.categories;
-      state.filteredItems = action.payload.filteredItems;
       state.items = action.payload.items;
+      state.isLoaded = true;
     },
   },
 });
@@ -30,23 +30,11 @@ export const getFoodItems = () => {
     };
     try {
       const data = await sendRequest();
-
+      const items = data.products;
       const categories = Array.from(
         new Set(data.products.map((product: any) => product.category))
       );
-
-      const filteredItems: any = {};
-      categories.map((category: any) => {
-        filteredItems[category] = [];
-      });
-      data.products.map((product: any) =>
-        filteredItems[product.category].push(product)
-      );
-
-      const items = data.products;
-
-      let loadedData = { categories, filteredItems, items };
-      dispatch(foodItemsActions.load(loadedData));
+      dispatch(foodItemsActions.load({ categories, items }));
     } catch (error) {
       console.log("error", error);
     }

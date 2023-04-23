@@ -5,28 +5,12 @@ import Link from "next/link";
 import classes from "./HomeCategories.module.scss";
 
 //redux
-import { useAppSelector, useAppDispatch } from "../hooks/SelectorDispatchTyped";
-import { filteredPageActions } from "../store/filteredPageSlice";
+import { useAppSelector } from "../hooks/SelectorDispatchTyped";
 
 const HomeCategories = () => {
-  const dispatch = useAppDispatch();
   const categoriesArrayState = useAppSelector(
     (state) => state.foodItems.categories
   );
-
-  const filteredItemsState: any = useAppSelector(
-    (state) => state.foodItems.filteredItems
-  );
-
-  const categoryLinkClickHandler = (event: any) => {
-    const propTitle = event.target.innerText;
-    dispatch(
-      filteredPageActions.change({
-        header: propTitle,
-        items: filteredItemsState[propTitle],
-      })
-    );
-  };
 
   return (
     <section className={classes["homepage-categories"]}>
@@ -40,8 +24,7 @@ const HomeCategories = () => {
             >
               <li className={classes["homepage-categories-list-item"]}>
                 <Link
-                  onClick={categoryLinkClickHandler}
-                  href={`./category/ ${category}`}
+                  href={`./category/${category}`}
                   className={classes["homepage-categories-list-link"]}
                 >
                   {category}

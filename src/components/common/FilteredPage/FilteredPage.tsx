@@ -12,20 +12,20 @@ import {
   useAppDispatch,
 } from "@component/components/hooks/SelectorDispatchTyped";
 
-const FilteredPage = () => {
+const FilteredPage = (props: any) => {
   const dispatch = useAppDispatch();
-
+  const foodItemsState = useAppSelector((state) => state.foodItems);
+  const display = foodItemsState.isLoaded;
   useEffect(() => {
     dispatch(getFoodItems());
   }, [dispatch]);
 
-  const display = useAppSelector((state) => state.filteredPage.header);
   return (
     <>
       {display && (
         <>
-          <Header />
-          <Content />
+          <Header data={props.data.id} />
+          <Content data={props.data} />
         </>
       )}
     </>

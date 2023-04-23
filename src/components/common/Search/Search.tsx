@@ -22,7 +22,7 @@ const Search: () => JSX.Element = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(true);
   const [searchLink, setSearchLink] = useState(<></>);
-  const searchLinkRef = useRef(null);
+  const searchLinkRef = useRef<HTMLAnchorElement>(null);
 
   const fooditemsArrayState = useAppSelector(
     (state: any) => state.foodItems.items

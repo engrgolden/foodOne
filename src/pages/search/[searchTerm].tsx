@@ -1,6 +1,5 @@
 import FilteredPage from "@component/components/common/FilteredPage/FilteredPage";
-
-const Search: () => JSX.Element = () => {
+const SearchPage: () => JSX.Element = () => {
   return (
     <>
       <FilteredPage />
@@ -8,4 +7,4 @@ const Search: () => JSX.Element = () => {
   );
 };
 
-export default Search;
+export default SearchPage;

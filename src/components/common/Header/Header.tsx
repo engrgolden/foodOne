@@ -8,13 +8,9 @@ import BackArrow from "../../../../public/images/back-arrow.svg";
 //style
 import classes from "./Header.module.scss";
 
-//redux
-import { useAppSelector } from "@component/components/hooks/SelectorDispatchTyped";
-const Header = () => {
-  const filteredPageState = useAppSelector((state) => state.filteredPage);
+const Header = (props: any) => {
   const headerProp =
-    filteredPageState.header.trim()[0].toUpperCase() +
-    filteredPageState.header.trim().slice(1);
+    props.data.trim()[0].toUpperCase() + props.data.trim().slice(1);
 
   return (
     <header className={classes["header"]}>
