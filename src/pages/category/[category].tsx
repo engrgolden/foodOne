@@ -1,5 +1,3 @@
-//import Home from "@component/components/Home/Home";
-
 //next;
 import { useRouter } from "next/router";
 
@@ -11,7 +9,7 @@ const Category: () => JSX.Element = () => {
   const id = router.query.category;
   return (
     <>
-      <FilteredPage data={{ type: "category", id: id }} />
+      <FilteredPage data={{ type: "category", id: id, header: id }} />
     </>
   );
 };

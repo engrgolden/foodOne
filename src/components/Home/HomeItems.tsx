@@ -1,3 +1,7 @@
+//assets
+import upArrow from "../../../public/images/up-arrow.svg";
+import downArrow from "../../../public/images/down-arrow.svg";
+
 //styles
 import classes from "./HomeItems.module.scss";
 
@@ -11,55 +15,145 @@ import Link from "next/link";
 //components
 import Stars from "../common/Star/Stars";
 
-const HomeItems = () => {
-  const fooditemsArrayState = useAppSelector(
-    (state: any) => state.foodItems.items
-  );
-  return (
-    <section className={classes["homepage-items"]}>
-      <h3 className={classes["homepage-items-title"]}>Popular Meals</h3>
-      {JSON.stringify(fooditemsArrayState) !== "[]" && (
-        <ul className={classes["homepage-items-list"]}>
-          {fooditemsArrayState.map((foodItem: any) => (
-            <li key={foodItem.id} className={classes["homepage-item"]}>
-              <div className={classes["homepage-item__image-wrapper"]}>
-                <Image
-                  className={classes["homepage-item__image"]}
-                  src={foodItem.thumbnail}
-                  alt={foodItem.title}
-                  fill
-                />
+//react
+import { useEffect, useState, useRef } from "react";
 
-                <button className={classes["homepage-item__view"]}>
-                  <Link
-                    className={classes["homepage-item__view-link"]}
-                    href={`./view/${foodItem.id}`}
-                  >
-                    View
-                  </Link>{" "}
-                  <hr />
-                </button>
-              </div>
-              <div className={classes["homepage-content"]}>
-                <p>{foodItem.title}</p>
-                <Stars star={foodItem.rating} />
-                <p>
-                  <span
-                    style={{
-                      textDecoration: "line-through",
-                      textDecorationStyle: "double",
-                    }}
-                  >
-                    N
-                  </span>
-                  {foodItem.price} per plate
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
+const HomeItems = () => {
+  const foodItemsState = useAppSelector((state: any) => state.foodItems);
+
+  let [foodItemsToRender, setFoodItemsToRender] = useState(
+    foodItemsState.items
+  );
+
+  let [sortDirection, setSortDirection] = useState("ascending");
+
+  let selectRef = useRef<HTMLSelectElement>(null);
+
+  useEffect(() => {
+    setFoodItemsToRender(unique(foodItemsState.items));
+  }, [foodItemsState.items]);
+
+  const unique = (data: any) => JSON.parse(JSON.stringify(data));
+
+  const specificSetter = (arrayProp: any, key: any, direction: any) => {
+    let sortedItems;
+    if (key === "default") {
+      sortedItems = unique(arrayProp);
+    } else if (key === "title") {
+      console.log(arrayProp);
+      sortedItems = unique(arrayProp).sort((a: any, b: any) =>
+        a[key].localeCompare(b[key], undefined, { sensitivity: "base" })
+      );
+    } else {
+      sortedItems = unique(arrayProp).sort((a: any, b: any) =>
+        a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0
+      );
+    }
+
+    if (direction === "descending") {
+      console.log(unique(arrayProp));
+      sortedItems = unique(sortedItems.reverse());
+    }
+
+    setFoodItemsToRender(unique(sortedItems));
+  };
+
+  const sortDirectionHandler = (event: any) => {
+    console.log(event.target.alt);
+    if (selectRef.current !== null) {
+      setSortDirection(event.target.alt);
+      specificSetter(
+        foodItemsState.items,
+        selectRef.current.value,
+        event.target.alt
+      );
+    }
+  };
+
+  const sortValueChangeHandler = (event: any) => {
+    specificSetter(foodItemsState.items, event.target.value, sortDirection);
+  };
+
+  return (
+    foodItemsState.isLoaded && (
+      <section className={classes["homepage-items"]}>
+        <header className={classes["homepage-items__header"]}>
+          <h3 className={classes["homepage-items-title"]}>Popular Meals</h3>
+          <section className={classes["homepage-items-sort"]}>
+            <label htmlFor="sort">Sort:</label>
+            <select
+              name="sort"
+              id="sort"
+              ref={selectRef}
+              onChange={sortValueChangeHandler}
+            >
+              <option value="default" selected>
+                Default
+              </option>
+              <option value="title">Alphabetical</option>
+              <option value="price">Price</option>
+              <option value="rating">Rating</option>
+            </select>
+
+            <button
+              onClick={sortDirectionHandler}
+              className={classes["homepage-items-sort-direction"]}
+              value="ascending"
+            >
+              <Image src={upArrow} alt="ascending" fill></Image>
+            </button>
+            <button
+              onClick={sortDirectionHandler}
+              className={classes["homepage-items-sort-direction"]}
+              value="descending"
+            >
+              <Image src={downArrow} alt="descending" fill></Image>
+            </button>
+          </section>
+        </header>
+        {JSON.stringify(foodItemsToRender) !== "[]" && (
+          <ul className={classes["homepage-items-list"]}>
+            {foodItemsToRender.map((foodItem: any) => (
+              <li key={foodItem.id} className={classes["homepage-item"]}>
+                <div className={classes["homepage-item__image-wrapper"]}>
+                  <Image
+                    className={classes["homepage-item__image"]}
+                    src={foodItem.thumbnail}
+                    alt={foodItem.title}
+                    fill
+                  />
+
+                  <button className={classes["homepage-item__view"]}>
+                    <Link
+                      className={classes["homepage-item__view-link"]}
+                      href={`./view/${foodItem.id}`}
+                    >
+                      View
+                    </Link>{" "}
+                    <hr />
+                  </button>
+                </div>
+                <div className={classes["homepage-content"]}>
+                  <p>{foodItem.title}</p>
+                  <Stars star={foodItem.rating} />
+                  <p>
+                    <span
+                      style={{
+                        textDecoration: "line-through",
+                        textDecorationStyle: "double",
+                      }}
+                    >
+                      N
+                    </span>
+                    {foodItem.price} per plate
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    )
   );
 };
 

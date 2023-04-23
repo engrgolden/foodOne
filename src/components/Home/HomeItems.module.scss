@@ -5,6 +5,34 @@
   padding: 0 0 0 0.5rem;
 }
 
+.homepage-items__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & label {
+    font-weight: bold;
+  }
+}
+
+.homepage-items-sort {
+  display: flex;
+  align-items: center;
+  margin: 0 0.5rem;
+  & label {
+    font-weight: bold;
+  }
+}
+
+.homepage-items-sort-direction {
+  position: relative;
+  height: 1.25rem;
+  width: 1.25rem;
+  background-color: transparent;
+  border: none;
+  margin: 0 0.25rem;
+}
+
 .homepage-item {
   margin: 0.5rem;
   width: 40vw;

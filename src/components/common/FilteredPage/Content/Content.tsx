@@ -29,6 +29,17 @@ const Content = (props: any) => {
             )
           );
           break;
+        case "search":
+          setFilteredItems(
+            JSON.parse(
+              JSON.stringify(
+                foodItemsState.items.filter((foodItem: any) =>
+                  foodItem.title.includes(props.data.id)
+                )
+              )
+            )
+          );
+          break;
 
         default:
           console.log("pass");

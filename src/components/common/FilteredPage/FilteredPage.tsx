@@ -24,7 +24,7 @@ const FilteredPage = (props: any) => {
     <>
       {display && (
         <>
-          <Header data={props.data.id} />
+          <Header data={props.data.header} />
           <Content data={props.data} />
         </>
       )}
