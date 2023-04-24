@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 //react
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //style
 import classes from "./ImageCarousel.module.scss";
@@ -18,6 +18,14 @@ const ImageCarousel = (props: any) => {
   const carouselImages = carouselItem.images;
 
   const imageCount = carouselImages.length;
+
+  useEffect(() => {
+    const automaticChanger = setInterval(() => {
+      setVisibleId((state) => state + 1);
+
+      return () => clearInterval(automaticChanger);
+    }, 5000);
+  }, []);
 
   const [visibleId, setVisibleId] = useState(0);
 

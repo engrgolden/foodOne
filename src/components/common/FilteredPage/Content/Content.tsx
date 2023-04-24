@@ -48,19 +48,29 @@ const Content = (props: any) => {
   }, [foodItemsState, props]);
 
   return (
-    <>
+    <section className={classes["wrapper"]}>
       {Boolean(filteredItems.length) &&
-        filteredItems.map((item: any) => (
-          <section key={item.id} className={classes["product-section"]}>
-            <div className={classes["image-wrapper"]}>
-              <ImageCarousel carouselItem={item} />
-            </div>
-            <p>{item.title}</p>
-            <Stars star={item.rating} />
-            <p>{item.price} per plate</p>
-          </section>
+        filteredItems.map((item: any, index: any) => (
+          <div
+            key={item.id}
+            className={classes["item-wrapper"]}
+            style={{
+              backgroundColor: Boolean(index % 2)
+                ? `rgb(${240},${240},${240})`
+                : `rgb(${200},${200},${200})`,
+            }}
+          >
+            <section className={classes["product-section"]}>
+              <div className={classes["image-wrapper"]}>
+                <ImageCarousel carouselItem={item} />
+              </div>
+              <p>{item.title}</p>
+              <Stars star={item.rating} />
+              <p>{item.price} per plate</p>
+            </section>
+          </div>
         ))}
-    </>
+    </section>
   );
 };
 

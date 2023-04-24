@@ -94,21 +94,22 @@ const HomeItems = () => {
               <option value="price">Price</option>
               <option value="rating">Rating</option>
             </select>
-
-            <button
-              onClick={sortDirectionHandler}
-              className={classes["homepage-items-sort-direction"]}
-              value="ascending"
-            >
-              <Image src={upArrow} alt="ascending" fill></Image>
-            </button>
-            <button
-              onClick={sortDirectionHandler}
-              className={classes["homepage-items-sort-direction"]}
-              value="descending"
-            >
-              <Image src={downArrow} alt="descending" fill></Image>
-            </button>
+            <div>
+              <button
+                onClick={sortDirectionHandler}
+                className={classes["homepage-items-sort-direction"]}
+                value="ascending"
+              >
+                <Image src={upArrow} alt="ascending" fill></Image>
+              </button>
+              <button
+                onClick={sortDirectionHandler}
+                className={classes["homepage-items-sort-direction"]}
+                value="descending"
+              >
+                <Image src={downArrow} alt="descending" fill></Image>
+              </button>
+            </div>
           </section>
         </header>
         {JSON.stringify(foodItemsToRender) !== "[]" && (
@@ -129,11 +130,11 @@ const HomeItems = () => {
                       href={`./view/${foodItem.id}`}
                     >
                       View
-                    </Link>{" "}
+                    </Link>
                     <hr />
                   </button>
                 </div>
-                <div className={classes["homepage-content"]}>
+                <div className={classes["homepage-item-content"]}>
                   <p>{foodItem.title}</p>
                   <Stars star={foodItem.rating} />
                   <p>

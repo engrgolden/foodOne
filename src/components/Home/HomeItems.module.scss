@@ -13,14 +13,24 @@
   & label {
     font-weight: bold;
   }
+
+  @media screen and (max-width: 325px) {
+    flex-direction: column;
+  }
 }
 
 .homepage-items-sort {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   margin: 0 0.5rem;
   & label {
     font-weight: bold;
+  }
+
+  div {
+    display: flex;
   }
 }
 
@@ -35,7 +45,9 @@
 
 .homepage-item {
   margin: 0.5rem;
-  width: 40vw;
+  width: 75vw;
+  min-width: 120px;
+  max-width: 200px;
 }
 
 .homepage-items-title {
@@ -53,8 +65,12 @@
 
 .homepage-item__image-wrapper {
   position: relative;
-  width: 40vw;
-  height: 40vw;
+  width: 75vw;
+  height: 75vw;
+  min-width: 120px;
+  min-height: 120px;
+  max-width: 200px;
+  max-height: 200px;
   overflow: hidden;
   border-radius: 2rem;
   box-shadow: 1px 1px 1px 1px;
@@ -93,7 +109,7 @@
   color: inherit;
 }
 
-.homepage-content {
+.homepage-item-content {
   & p {
     margin: 0;
     word-break: break-all;

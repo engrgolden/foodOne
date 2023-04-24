@@ -13,7 +13,7 @@ const HomeNavigation = () => {
   return (
     <>
       <header className={classes["header"]}>
-        <Link href="/cart">
+        <Link href="/navigation">
           <Image
             height={16}
             width={16}
