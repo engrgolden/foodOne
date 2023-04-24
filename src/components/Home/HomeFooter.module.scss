@@ -1,6 +1,12 @@
 .footer {
+  width: 100vw;
+  background-color: white;
+  z-index: 6;
   display: flex;
   justify-content: space-evenly;
   padding: 0.5rem;
   padding-bottom: 0.25rem;
+  position: fixed;
+
+  bottom: 0;
 }
