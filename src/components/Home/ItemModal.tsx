@@ -17,7 +17,7 @@ const ItemModal = (props: any) => {
     (item: any) => item.id === Number(props.id)
   );
 
-  const hideModalHandler = (event) => {
+  const hideModalHandler = (event: any) => {
     dispatch(ItemModalActions.unloader());
   };
   return (
