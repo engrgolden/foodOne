@@ -10,7 +10,7 @@ const SearchPage: () => JSX.Element = () => {
   return (
     <>
       <FilteredPage
-        data={{ type: "search", id: id, header: "Search Results" }}
+        data={{ type: "search", id: id, header: `Search results for "${id}"` }}
       />
     </>
   );

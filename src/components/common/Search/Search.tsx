@@ -17,28 +17,42 @@ import { useAppSelector } from "@component/components/hooks/SelectorDispatchType
 //components
 import SearchSuggestions from "./SearchSuggestions";
 
+
+
+interface Tools  {
+  bestRatedProp: 
+    {id:number, title:string}[];
+  showSuggestions : boolean;
+  disableSubmit:boolean
+  searchLink:any
+};
+
+
+
+
 const Search: () => JSX.Element = () => {
-  const [bestRatedProp, setBestRatedProp] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [disableSubmit, setDisableSubmit] = useState(true);
-  const [searchLink, setSearchLink] = useState(<></>);
+  const [tools, setTools] = useState<Tools>({bestRatedProp:[], showSuggestions:false,disableSubmit:true,searchLink:<></>})
+  // const [bestRatedProp, setBestRatedProp] = useState([]);
+  // const [showSuggestions, setShowSuggestions] = useState(false);
+  // const [disableSubmit, setDisableSubmit] = useState(true);
+  // const [searchLink, setSearchLink] = useState(<></>);
   const searchLinkRef = useRef<HTMLAnchorElement>(null);
 
   const fooditemsArrayState = useAppSelector(
     (state: any) => state.foodItems.items
   );
 
-  const setter = (
-    bestprop: any = [],
-    suggestions: any = false,
-    submit: any = true,
-    link: any = <></>
-  ) => {
-    setBestRatedProp(bestprop);
-    setShowSuggestions(suggestions);
-    setDisableSubmit(submit);
-    setSearchLink(link);
-  };
+  // const setter = (
+  //   bestprop: any = [],
+  //   suggestions: any = false,
+  //   submit: any = true,
+  //   link: any = <></>
+  // ) => {
+  //   setBestRatedProp(bestprop);
+  //   setShowSuggestions(suggestions);
+  //   setDisableSubmit(submit);
+  //   setSearchLink(link);
+  // };
 
   const inputChangeHandler = (event: any) => {
     const searchString = event.target.value.toLowerCase().trim();
@@ -52,20 +66,35 @@ const Search: () => JSX.Element = () => {
           .sort((a: any, b: any) => b.rating - a.rating);
 
         if (bestRated.length > 0) {
-          setter(
-            JSON.parse(JSON.stringify(bestRated.slice(0, 3))),
-            true,
-            false,
-            <Link href={`./search/${searchString}`} ref={searchLinkRef} />
-          );
+          setTools({
+            bestRatedProp: JSON.parse(JSON.stringify(bestRated.slice(0, 3))),
+            showSuggestions: true,
+            disableSubmit: false,
+            searchLink: <Link href={`./search/${searchString}`} ref={searchLinkRef} />
+        });
         } else {
-          setter([{ id: 0, title: "no results" }], true, true, undefined);
+
+          setTools({
+            bestRatedProp: [{ id: 0, title: "no results" }],
+            showSuggestions: true,
+            disableSubmit: true,
+            searchLink: <></>
+        });
         }
       } else {
-        setter(undefined, false, true, undefined);
+        setTools({
+          bestRatedProp: [],
+          showSuggestions: false,
+          disableSubmit: true,
+          searchLink: <></>
+      });
       }
-    } else {
-      setter(undefined, false, true, undefined);
+    } else {setTools({
+      bestRatedProp: [],
+      showSuggestions: false,
+      disableSubmit: true,
+      searchLink: <></>
+  });
     }
   };
 
@@ -94,7 +123,7 @@ const Search: () => JSX.Element = () => {
         <button
           className={classes["search-submit"]}
           type="submit"
-          disabled={disableSubmit}
+          disabled={tools.disableSubmit}
         >
           <Image
             className={classes["search-image"]}
@@ -105,8 +134,8 @@ const Search: () => JSX.Element = () => {
           ></Image>
         </button>
       </form>
-      {showSuggestions && <SearchSuggestions suggestions={bestRatedProp} />}
-      {searchLink}
+      {tools.showSuggestions && <SearchSuggestions suggestions={tools.bestRatedProp} />}
+      {tools.searchLink}
     </section>
   );
 };
