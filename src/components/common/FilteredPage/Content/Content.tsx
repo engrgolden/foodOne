@@ -1,6 +1,5 @@
 //components
-import ImageCarousel from "./ImageCarousel";
-import Stars from "../../Star/Stars";
+import Item from "../../Item/Item";
 
 //style
 import classes from "./Content.module.scss";
@@ -34,7 +33,9 @@ const Content = (props: any) => {
             JSON.parse(
               JSON.stringify(
                 foodItemsState.items.filter((foodItem: any) =>
-                  foodItem.title.includes(props.data.id)
+                  foodItem.title
+                    .toLowerCase()
+                    .includes(props.data.id.toLowerCase())
                 )
               )
             )
@@ -60,14 +61,7 @@ const Content = (props: any) => {
                 : `rgb(${200},${200},${200})`,
             }}
           >
-            <section className={classes["product-section"]}>
-              <div className={classes["image-wrapper"]}>
-                <ImageCarousel carouselItem={item} />
-              </div>
-              <p>{item.title}</p>
-              <Stars star={item.rating} />
-              <p>{item.price} per plate</p>
-            </section>
+            <Item item={item} />
           </div>
         ))}
     </section>

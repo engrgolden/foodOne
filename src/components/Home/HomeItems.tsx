@@ -6,7 +6,8 @@ import downArrow from "../../../public/images/down-arrow.svg";
 import classes from "./HomeItems.module.scss";
 
 //redux
-import { useAppSelector } from "../hooks/SelectorDispatchTyped";
+import { useAppSelector, useAppDispatch } from "../hooks/SelectorDispatchTyped";
+import { ItemModalActions } from "../store/itemModalSlice";
 
 //next
 import Image from "next/image";
@@ -19,6 +20,7 @@ import Stars from "../common/Star/Stars";
 import { useEffect, useState, useRef } from "react";
 
 const HomeItems = () => {
+  const dispatch = useAppDispatch();
   const foodItemsState = useAppSelector((state: any) => state.foodItems);
 
   let [foodItemsToRender, setFoodItemsToRender] = useState(
@@ -74,6 +76,10 @@ const HomeItems = () => {
     specificSetter(foodItemsState.items, event.target.value, sortDirection);
   };
 
+  const viewItemHandler = (event: any) => {
+    dispatch(ItemModalActions.loader({ id: event.target.dataset.id }));
+  };
+
   return (
     foodItemsState.isLoaded && (
       <section className={classes["homepage-items"]}>
@@ -124,13 +130,12 @@ const HomeItems = () => {
                     fill
                   />
 
-                  <button className={classes["homepage-item__view"]}>
-                    <Link
-                      className={classes["homepage-item__view-link"]}
-                      href={`./view/${foodItem.id}`}
-                    >
-                      View
-                    </Link>
+                  <button
+                    onClick={viewItemHandler}
+                    className={classes["homepage-item__view"]}
+                    data-id={foodItem.id}
+                  >
+                    View
                     <hr />
                   </button>
                 </div>

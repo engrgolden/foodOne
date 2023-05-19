@@ -55,17 +55,18 @@ const Search: () => JSX.Element = () => {
   // };
 
   const inputChangeHandler = (event: any) => {
-    const searchString = event.target.value.toLowerCase().trim();
+    const searchString = event.target.value.trim();
     const uniqueState = JSON.parse(JSON.stringify(fooditemsArrayState));
     if (searchString !== "") {
       if (uniqueState.length !== 0) {
         const bestRated = uniqueState
           .filter((foodItem: any) =>
-            foodItem.title.toLowerCase().includes(searchString)
+            foodItem.title.toLowerCase().includes(searchString.toLowerCase())
           )
           .sort((a: any, b: any) => b.rating - a.rating);
 
         if (bestRated.length > 0) {
+          console.log(searchString)
           setTools({
             bestRatedProp: JSON.parse(JSON.stringify(bestRated.slice(0, 3))),
             showSuggestions: true,

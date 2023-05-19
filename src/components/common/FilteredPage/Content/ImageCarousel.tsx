@@ -16,7 +16,6 @@ const ImageCarousel = (props: any) => {
   const carouselItem = props.carouselItem;
 
   const carouselImages = carouselItem.images;
-
   const imageCount = carouselImages.length;
 
   useEffect(() => {
