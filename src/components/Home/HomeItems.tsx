@@ -85,7 +85,10 @@ const HomeItems = () => {
       <section className={classes["homepage-items"]}>
         <header className={classes["homepage-items__header"]}>
           <h3 className={classes["homepage-items-title"]}>Popular Meals</h3>
-          <section className={classes["homepage-items-sort"]}>
+          <section
+            className={classes["homepage-items-sort"]}
+            defaultValue={"default"}
+          >
             <label htmlFor="sort">Sort:</label>
             <select
               name="sort"
@@ -93,12 +96,10 @@ const HomeItems = () => {
               ref={selectRef}
               onChange={sortValueChangeHandler}
             >
-              <option value="default" selected>
-                Default
-              </option>
-              <option value="title">Alphabetical</option>
-              <option value="price">Price</option>
-              <option value="rating">Rating</option>
+              <option value="default">default</option>
+              <option value="title">alphabetical</option>
+              <option value="price">price</option>
+              <option value="rating">rating</option>
             </select>
             <div>
               <button

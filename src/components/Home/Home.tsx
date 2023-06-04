@@ -7,22 +7,13 @@ import HomeFooter from "./HomeFooter";
 import ItemModal from "./ItemModal";
 
 //redux
-import { useAppDispatch, useAppSelector } from "../hooks/SelectorDispatchTyped";
-import { getFoodItems } from "../store/foodItemsSlice";
-
-//react
-import { useEffect } from "react";
+import { useAppSelector } from "../hooks/SelectorDispatchTyped";
 
 //style
 import classes from "./Home.module.scss";
 
 const Home = () => {
   const itemModalState = useAppSelector((state) => state.itemModal);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getFoodItems());
-  }, [dispatch]);
 
   return (
     <>

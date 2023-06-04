@@ -1,0 +1,20 @@
+.signing-form {
+    background-color: lightblue;
+    padding:10vh 10vw;
+    display:flex;
+    flex-direction: column;
+}
+
+
+.signing-form-item{
+    margin: .5rem;
+    display:flex;
+    flex-direction: column;
+
+    & input{
+        height: 2rem;
+        border-radius: 1rem;
+        border: 2px solid black;
+        padding: 0 1rem;
+    }
+}

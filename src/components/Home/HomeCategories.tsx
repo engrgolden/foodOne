@@ -17,7 +17,7 @@ const HomeCategories = () => {
       <h3 className={classes["homepage-categories-title"]}>Meal Categories</h3>
       {JSON.stringify(categoriesArrayState) !== "[]" && (
         <ul className={classes["homepage-categories-list"]}>
-          {categoriesArrayState.map((category, index) => (
+          {categoriesArrayState.map((category: any, index: any) => (
             <div
               className={classes["homepage-categories-list-wrapper"]}
               key={index}
